@@ -12,8 +12,8 @@ def importkey(name, optional=False):
 
     secretPath = "/run/secrets/"+key
     if (os.path.isfile(secretPath)):
-        secret = open(secretPath, "r")
-        out = "{}".format(secret.readline().strip())
+        with open(secretPath, "r") as secret:
+            out = "{}".format(secret.readline().strip())
         return out
     elif (key in os.environ):
         return os.environ.get(key)
