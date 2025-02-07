@@ -9,7 +9,7 @@ def getZoneId(token, domain):
     headers = {
     'Authorization': "Bearer {}".format(token)
     }
-    response = requests.request("GET", url, headers=headers, data=payload)
+    response = requests.request("GET", url, headers=headers, data=payload, timeout=60)
     data = json.loads(response.text)
 
     if data['success']:
@@ -30,7 +30,7 @@ def getZoneRecords(token, domain, hostname=False, zoneId=False):
     'Authorization': "Bearer {}".format(token)
     }
 
-    response = requests.request("GET", url, headers=headers, data=payload)
+    response = requests.request("GET", url, headers=headers, data=payload, timeout=60)
     data = json.loads(response.text)
 
     output = []
@@ -64,7 +64,7 @@ def createDNSRecord(token, domain, name, type, content, subdomain=None, zoneId=F
         'Authorization': "Bearer {}".format(token)
     }
 
-    response = requests.request("POST", url, headers=headers, data=json.dumps(payload))
+    response = requests.request("POST", url, headers=headers, data=json.dumps(payload), timeout=60)
     data = json.loads(response.text)
 
     if data['success'] == True:
@@ -82,7 +82,7 @@ def deleteDNSRecord(token, domain, id, zoneId=False):
     headers = {
         'Authorization': "Bearer {}".format(token)
     }
-    response = requests.request("DELETE", url, headers=headers)
+    response = requests.request("DELETE", url, headers=headers, timeout=60)
     data = json.loads(response.text)
     print("--> [CLOUDFLARE] [{code}] {msg}".format(code=response.status_code, msg=colored('record deleted', "green")))
 
