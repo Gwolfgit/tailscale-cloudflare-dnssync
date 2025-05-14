@@ -9,7 +9,7 @@ def getTailscaleDevice(apikey, tailnet):
     payload={}
     headers = {
     }
-    response = requests.request("GET", url, headers=headers, data=payload, auth=HTTPBasicAuth(username=apikey, password=""))
+    response = requests.request("GET", url, headers=headers, data=payload, auth=HTTPBasicAuth(username=apikey, password=""), timeout=60)
     # print(response.text)
     # print(json.dumps(json.loads(response.text), indent=2))
 
